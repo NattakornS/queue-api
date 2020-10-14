@@ -5,3 +5,6 @@ package-lock.json
 dist
 
 .vscode/
+
+build
+oracle

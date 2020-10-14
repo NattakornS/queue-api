@@ -116,6 +116,26 @@ if (process.env.DBHIS_TYPE === 'pg' || process.env.DBHIS_TYPE === 'mssql' || pro
 
       connectionName: 'dbHIS'
     });
+  } else if (process.env.DBHIS_TYPE === 'oracledb') {
+    const connectString = process.env.DBHIS_HOST+':'+process.env.DBHIS_PORT+'/'+process.env.DBHIS_NAME
+    console.log(connectString);
+    
+    app.register(require('./plugins/db'), {
+      connection: {
+        client: process.env.DBHIS_TYPE,
+        connection: {
+          user: process.env.DBHIS_USER,
+          password: process.env.DBHIS_PASSWORD,
+          connectString
+        },
+        pool: {
+          min: 0,
+          max: 7
+        },
+        debug: false,
+      },
+      connectionName: 'dbHIS'
+    });
   } else {
     app.register(require('./plugins/db'), {
       connection: {
