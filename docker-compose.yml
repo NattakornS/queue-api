@@ -1,14 +1,15 @@
 version: "3"
 services:
   queue:
-    # image: "mophos/queue"
-    build: "./../"
+    build: "."
+    image: "mophos/queue"
     container_name: "queue"
     ports:
       - 80:80
       - 8888:8888
       - 1883:1883
     volumes:
+      - ./src/:/home/queue/queue-api/src/
       - ./config:/home/queue/queue-api/config
       - ./mqtt-config:/home/queue/queue-mqtt/config
     restart: always

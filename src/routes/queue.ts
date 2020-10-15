@@ -16,6 +16,7 @@ import { HomcModel } from '../models/his/homc';
 import { ServicePointModel } from '../models/service_point';
 import { PriorityModel } from '../models/priority';
 import { ServiceRoomModel } from '../models/service_room';
+import { WuHisModel } from '../models/his/wuhis';
 
 const queueModel = new QueueModel();
 const servicePointModel = new ServicePointModel();
@@ -45,6 +46,9 @@ switch (hisType) {
     break;
   case 'universal':
     hisModel = new UniversalModel();
+    break;
+  case 'wuhis':
+    hisModel = new WuHisModel();
     break;
   default:
     hisModel = new HosxpModel();

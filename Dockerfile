@@ -51,7 +51,7 @@ ENV ORACLE_HOME /usr/lib/instantclient
 
 RUN cd queue-api && npm i && npm i oracledb --save && npm run build && cd ..
 
-RUN cd queue-mqtt && npm i && cd ..
+RUN cd queue-mqtt && npm i && npm i jsonschema@1.2.6 --save && cd ..
 
 COPY nginx.conf /etc/nginx/
 

@@ -132,7 +132,7 @@ if (process.env.DBHIS_TYPE === 'pg' || process.env.DBHIS_TYPE === 'mssql' || pro
           min: 0,
           max: 7
         },
-        debug: false,
+        debug: true,
       },
       connectionName: 'dbHIS'
     });

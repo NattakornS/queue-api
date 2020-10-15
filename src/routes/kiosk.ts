@@ -11,6 +11,7 @@ import { HiModel } from '../models/his/hi';
 import { HosxpModel } from '../models/his/hosxp';
 import { UniversalModel } from '../models/his/universal';
 import { HomcModel } from '../models/his/homc';
+import { WuHisModel } from '../models/his/wuhis';
 const hisType = process.env.HIS_TYPE || 'universal';
 
 const kioskModel = new KioskModel();
@@ -35,6 +36,9 @@ switch (hisType) {
     break;
   case 'universal':
     hisModel = new UniversalModel();
+    break;
+  case 'wuhis':
+    hisModel = new WuHisModel();
     break;
   default:
     hisModel = new HosxpModel();
