@@ -103,7 +103,7 @@ const router = (fastify, { }, next) => {
           const timeServ: any = moment(info.time_serv, "HH:mm:ss").format('HHmm');
           const dateCreated: any = moment(info.date_create).locale('th').format('DD/MM/YYYY HH:mm');
           const localCode: any = info.local_code;
-          const qrcode = `${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}` // `${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`;
+          const qrcode = `${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}&token=${process.env.Q4U_NOTIFY_TOKEN}&topic=${process.env.Q4U_NOTIFY_TOPIC}` // `${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`;
 
           var data: any = {
             "printSmallQueue": printSmallQueue,
