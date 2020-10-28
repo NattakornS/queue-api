@@ -1532,6 +1532,12 @@ const router = (fastify, { }, next) => {
     }
   });
 
+  fastify.post('/info', async (req:fastify.Request, reply: fastify.Reply) => {
+    const queueId = req.body.queueId;
+    const rsQueue: any = await queueModel.getResponseQueueInfo(db, [queueId]);
+    reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rsQueue[0] });
+  })
+
   next();
 
 };

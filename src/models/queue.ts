@@ -846,7 +846,7 @@ export class QueueModel {
 
     return db('q4u_queue as q')
       .select('q.hn', 'q.vn', 'q.queue_id', 'q.queue_number', 'q.queue_interview', 'q.queue_running', 'q.date_serv',
-        'sp.service_point_name', 'sp.local_code as service_point_code',
+        'sp.service_point_name','q.service_point_id','sp.local_code as service_point_code',
         'q.date_create', 'sp.department_id', 'p.priority_name', 'p.priority_id', 'r.room_name', 'r.room_number',
         sqlHoscode, sqlHospname)
       .leftJoin('q4u_queue_group_detail as qg', 'qg.queue_id', 'q.queue_id')
