@@ -26,9 +26,15 @@ const router = (fastify, { }, next) => {
   })
 
   fastify.get('/kios', { preHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
-
     try {
-      const rs: any = await servicePointModel.listKios(db);
+      var rs: any = await servicePointModel.listKios(db);
+      if(req.params.mode === 'new') {
+        rs = rs.filters(x=>x.service_point_id === 1000)
+      } else {
+        // filter by vn from his
+        
+      }
+
       reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, results: rs })
     } catch (error) {
       fastify.log.error(error);
