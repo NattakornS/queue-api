@@ -117,6 +117,8 @@ if (process.env.DBHIS_TYPE === 'pg' || process.env.DBHIS_TYPE === 'mssql' || pro
       connectionName: 'dbHIS'
     });
   } else if (process.env.DBHIS_TYPE === 'oracledb') {
+    // author: ntks
+    // desc : add oracle db
     const connectString = process.env.DBHIS_HOST+':'+process.env.DBHIS_PORT+'/'+process.env.DBHIS_NAME
     console.log(connectString);
     
