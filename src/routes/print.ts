@@ -41,7 +41,9 @@ const router = (fastify, { }, next) => {
           const timeServ: any = moment(info.time_serv, 'HH:mm:ss').format('HHmm');
           const dateCreated: any = moment(info.date_create).locale('th').format('DD/MM/YYYY HH:mm');
           const localCode: any = info.local_code;
-          const qrcode = await QRCode.toDataURL(`${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}&token=${process.env.Q4U_NOTIFY_TOKEN}&topic=${process.env.Q4U_NOTIFY_TOPIC}`);// `${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`);
+          const qrcode = await QRCode.toDataURL(`${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`);
+          //`${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}&token=${process.env.Q4U_NOTIFY_TOKEN}&topic=${process.env.Q4U_NOTIFY_TOPIC}`);
+          // 
 
           // var templateDir = path.join(__dirname, '../templates/queue-qrcode.ejs');
           // console.log(templateDir);
@@ -103,8 +105,8 @@ const router = (fastify, { }, next) => {
           const timeServ: any = moment(info.time_serv, "HH:mm:ss").format('HHmm');
           const dateCreated: any = moment(info.date_create).locale('th').format('DD/MM/YYYY HH:mm');
           const localCode: any = info.local_code;
-          const qrcode = `${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}&token=${process.env.Q4U_NOTIFY_TOKEN}&topic=${process.env.Q4U_NOTIFY_TOPIC}` // `${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`;
-
+          const qrcode = `${hosid}#${process.env.Q4U_NOTIFY_TOKEN}#${hn}#${localCode}#${queueNumber}#${queueWithoutPrefix}#${dateServ}#${timeServ}#${servicePointName}#${priorityName}`;
+          //`${process.env.WEB_HOST}/#/customer/qscan?queueId=${queueId}&token=${process.env.Q4U_NOTIFY_TOKEN}&topic=${process.env.Q4U_NOTIFY_TOPIC}` 
           var data: any = {
             "printSmallQueue": printSmallQueue,
             "hn": hn,
