@@ -69,6 +69,23 @@ const router = (fastify, { }, next) => {
     }
   })
 
+  fastify.get('/regmode', { preHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
+
+    try {
+      var servicePointCode = req.query.kioskId || ''
+      const rs: any = await servicePointModel.list(db);
+      const kioskMode = rs.filter(x=>x.kios_reg === 'Y' && x.local_code === servicePointCode)
+      var result = false
+      if (kioskMode) {
+        result = true
+      }
+      reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, result: result })
+    } catch (error) {
+      fastify.log.error(error);
+      reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR) })
+    }
+  })
+
   fastify.get('/kios', { preHandler: [fastify.authenticate] }, async (req: fastify.Request, reply: fastify.Reply) => {
     try {
       // modify
@@ -90,7 +107,7 @@ const router = (fastify, { }, next) => {
       });
 
       if(req.query.mode === 'new') {
-        rs = rs.filter(x=>x.service_point_id === 1000 || x.service_point_id === 1001)
+        rs = rs.filter(x=>x.kios_reg === 'Y')
       } else {
         // filter by vn from his
         // if (req.params.kioskId) {
@@ -103,7 +120,7 @@ const router = (fastify, { }, next) => {
         if (avaliableClinics.length > 0) {
           local_codes = avaliableClinics.map(x=>x.clinic_code+'')
         } else {
-          local_codes.push('1000')
+          local_codes.push(servicePointCode)
         }
         console.log(local_codes,rs);
         rs = rs.filter(x=>local_codes.includes(x.local_code))
@@ -129,6 +146,7 @@ const router = (fastify, { }, next) => {
     const priorityQueueRunning = req.body.priorityQueueRunning || 'N';
     const rnd = new Random();
     const strRnd = rnd.integer(1111111111, 9999999999);
+    const kioskReg = req.body.kioskReg
 
     const data: any = {
       service_point_name: servicePointName,
@@ -140,7 +158,8 @@ const router = (fastify, { }, next) => {
       kios: kios,
       use_old_queue: useOldQueue,
       group_compare: groupCompare,
-      priority_queue_running: priorityQueueRunning
+      priority_queue_running: priorityQueueRunning,
+      kios_reg: kioskReg
     };
 
     try {
@@ -166,6 +185,7 @@ const router = (fastify, { }, next) => {
     const priorityQueueRunning = req.body.priorityQueueRunning || 'N';
     const rnd = new Random();
     const strRnd = rnd.integer(1111111111, 9999999999);
+    const kioskReg = req.body.kioskReg
 
     const data: any = {
       service_point_name: servicePointName,
@@ -177,7 +197,8 @@ const router = (fastify, { }, next) => {
       kios: kios,
       use_old_queue: useOldQueue,
       group_compare: groupCompare,
-      priority_queue_running: priorityQueueRunning
+      priority_queue_running: priorityQueueRunning,
+      kios_reg: kioskReg
     };
 
     try {
