@@ -76,7 +76,7 @@ const router = (fastify, { }, next) => {
       const rs: any = await servicePointModel.list(db);
       const kioskMode = rs.filter(x=>x.kios_reg === 'Y' && x.local_code === servicePointCode)
       var result = false
-      if (kioskMode) {
+      if (kioskMode.length > 0) {
         result = true
       }
       reply.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK, result: result })
