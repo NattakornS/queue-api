@@ -147,6 +147,7 @@ const router = (fastify, { }, next) => {
     const rnd = new Random();
     const strRnd = rnd.integer(1111111111, 9999999999);
     const kioskReg = req.body.kioskReg
+    const servicePointType = req.body.servicePointType;
 
     const data: any = {
       service_point_name: servicePointName,
@@ -159,7 +160,8 @@ const router = (fastify, { }, next) => {
       use_old_queue: useOldQueue,
       group_compare: groupCompare,
       priority_queue_running: priorityQueueRunning,
-      kios_reg: kioskReg
+      kios_reg: kioskReg,
+      service_point_type: servicePointType
     };
 
     try {
@@ -186,6 +188,7 @@ const router = (fastify, { }, next) => {
     const rnd = new Random();
     const strRnd = rnd.integer(1111111111, 9999999999);
     const kioskReg = req.body.kioskReg
+    const servicePointType = req.body.servicePointType;
 
     const data: any = {
       service_point_name: servicePointName,
@@ -198,7 +201,8 @@ const router = (fastify, { }, next) => {
       use_old_queue: useOldQueue,
       group_compare: groupCompare,
       priority_queue_running: priorityQueueRunning,
-      kios_reg: kioskReg
+      kios_reg: kioskReg,
+      service_point_type: servicePointType
     };
 
     try {
