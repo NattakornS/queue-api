@@ -37,13 +37,13 @@ export class ServicePointModel {
   getSound(db: knex, servicePointId: any) {
     return db('q4u_service_points as sp')
       .join('q4u_sounds as s', 'sp.sound_id', 's.sound_id')
-      .select('sp.sound_id', 'sp.sound_speed', 's.sound_file')
+      .select('sp.sound_id', 'sp.sound_speed', 's.sound_file', 'sp.service_point_type')
       .where('service_point_id', servicePointId);
   }
 
   getSoundList(db: knex, servicePointId: any) {
     return db('q4u_service_points as sp')
-      .select('sp.sound_id', 'sr.room_id', 's.sound_file')
+      .select('sp.sound_id', 'sr.room_id', 's.sound_file', 'sp.service_point_type')
       .join('q4u_service_rooms as sr', 'sr.service_point_id', 'sp.service_point_id')
       .join('q4u_sounds as s', 'sr.sound_id', 's.sound_id')
       .where('sp.service_point_id', servicePointId);
@@ -51,7 +51,7 @@ export class ServicePointModel {
 
   getSoundListDepartment(db: knex, departmentId: any) {
     return db('q4u_service_points as sp')
-      .select('sp.sound_id', 'sr.room_id', 's.sound_file')
+      .select('sp.sound_id', 'sr.room_id', 's.sound_file' ,'sp.service_point_type')
       .join('q4u_service_rooms as sr', 'sr.service_point_id', 'sp.service_point_id')
       .join('q4u_sounds as s', 'sr.sound_id', 's.sound_id')
       .where('sp.department_id', departmentId);
